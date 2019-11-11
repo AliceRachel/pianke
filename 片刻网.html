@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .nav_body {
+            width: 100%;
+            box-shadow: 2px 2px 3px lightgray;
+            height: 100px;
+            position: fixed;
+            left: 0;
+            top:0px;
+            z-index: 1000;
+            background-color: white;
+            opacity: 0.9;
+            transition: top 1s;
+        }
+        /*清除浮动*/
+        .imgR, .right div, .pics, .nav, .heart ,.ting{
+            overflow: hidden;
+        }
+        /*鼠标移入变小手*/
+        .heartText h2:hover,.app:hover .app2,.sina:hover .sina2 ,.wechat:hover .we2,.wechat:hover .code, .heartText h6:hover,.footText1,.more div:hover, .nav .span, .login, .right div, .imgR, .nav .always, .heartImg ,.hot .hotText div,.hot .hotImg img{
+            cursor: pointer;
+        }
+        .nav {
+            height: 100px;
+            width: 1200px;
+            margin: 0 auto;
+        }
+        .fl {
+            float: left;
+        }
+        .fr {
+            float: right;
+        }
+        .nav_logo {
+            padding: 30px 100px 30px 60px;
+        }
+        .nav_logo, .nav span {
+            display: inline-block;
+        }
+        .nav span {
+            height: 38px;
+            line-height: 38px;
+            padding: 29.5px 25px;
+        }
+        .nav .always {
+            border-bottom: 3px solid gray;
+            background-color: rgb(251, 251, 251);
+        }
+        .nav .span:hover {
+            background-color: rgb(251, 251, 251);
+            border-bottom: 5px solid rgb(251, 251, 251);
+        }
+        .edit {
+            width: 40px;
+            height: 40px;
+            border-radius: 40px;
+            border: 1px solid rgb(121, 183, 28);
+            margin-top: 30px;
+        }
+        .edit div {
+            width: 36px;
+            height: 36px;
+            background-color: rgb(121, 183, 28);
+            border-radius: 18px;
+            margin: 2px;
+        }
+        .edit div img {
+            width: 25px;
+            margin: 5px;
+        }
+        .edit div:hover {
+            /*width: 34px;*/
+            /*height: 34px;*/
+            /*margin: 3px;*/
+            box-shadow: 0px 0px 2px 1px white inset;
+        }
+        .login {
+            width: 140px;
+            height: 40px;
+            border: 1px solid rgb(121, 183, 28);
+            border-radius: 25px;
+            text-align: center;
+            line-height: 40px;
+            margin: 30px 50px 0px 70px;
+            color: rgb(121, 183, 28);
+        }
+        .login:hover {
+            background-color: rgb(121, 183, 28);
+            color: #fff;
+            transition: all 0.5s;
+        }
+        .all {
+            background-image: url("img/bgImg.png");
+            width: 100%;
+            background-repeat: no-repeat;
+            background-color: #fafafa;
+            padding-top: 100px;
+        }
+        .main {
+            width: 960px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        .pics {
+            padding-top: 30px;
+        }
+        .right img, .imgR img {
+            vertical-align: bottom;
+        }
+        .imgR, .imgR img {
+            width: 480px;
+            height: 480px;
+        }
+        .right img {
+            width: 240px;
+            height: 240px;
+        }
+        .right div {
+            width: 240px;
+            height: 240px;
+        }
+        .imgR, .right div {
+            position: relative;
+        }
+        .imgR .imgText, .right .imgText {
+            position: absolute;
+            bottom: 0;
+            background-color: black;
+            opacity: 0.3;
+            height: 70px;
+            width: 100%;
+            color: white;
+            display: none;
+        }
+        .right div:hover img {
+            transform: scale(1.1);
+            animation: 1.5s linear;
+            transition: 0.5s;
+        }
+        .right div:hover div {
+            display: block;
+        }
+        .imgR:hover div {
+            display: block;
+        }
+        .imgR:hover img ,.tingImg:hover .tingMain{
+            transform: scale(1.1);
+            animation: 1.5s linear;
+            transition: 0.5s;
+        }
+        .imgR .imgText div, .right .imgText div {
+            width: 300px;
+            font-size: 20px;
+            white-space: nowrap;
+            /*多行文本溢出用...省略号形式展示*/
+            text-overflow: ellipsis;
+            overflow: hidden;
+            padding: 30px 20px;
+            position: relative;
+            font-weight: 300;
+        }
+        .right .imgText div {
+            /*控制显示文字的宽度这样超过的内容会以...形式展示，可以看到效果整体div是300*/
+            width: 100px;
+        }
+        .imgR .imgText::before, .right .imgText::before {
+            content: "";
+            width: 0px;
+            height: 1px;
+            background-color: white;
+            position: absolute;
+            top: 18px;
+            left: 20px;
+
+        }
+        .read img {
+            vertical-align: top;
+            margin-top: 1px;
+        }
+        .read {
+            margin: 70px 0 30px 0;
+        }
+        .heart {
+            width: 960px;
+            height: 220px;
+            border: 1px solid #e8e8e8;
+            margin-bottom: 15px;
+        }
+        .heartText {
+            width: 612px;
+            height: 220px;
+            padding: 20px 30px 20px 20px;
+            background-color: white;
+        }
+        .heartText h2,.tingText h2 {
+            font-weight: 300;
+        }
+        .heartText h6 {
+            margin-bottom: 30px;
+            font-weight: 800;
+        }
+        .heartText h6 ,.tingText h6{
+            font-weight: 800;
+        }
+        .heartText p {
+            font-size: 14px;
+            color: #a5a59f;
+            position: relative;
+        }
+        .heartText p::before {
+            content: "";
+            width: 30px;
+            border-top: 1px solid black;
+            position: absolute;
+            top: -15px;
+        }
+        .heartText p a {
+            color: #83bc80;
+            text-decoration: none;
+        }
+        .heartText p a:hover {
+            color: #57ad68;
+        }
+        .heartText p a img {
+            width: 10px;
+            height: 12px;
+        }
+        .heartText div {
+            margin-top: 50px;
+        }
+        .heartText div ,.tingText div{
+            font-size: 13px;
+            color: #9e9999;
+        }
+        .heartText div, .heartText p, .heartText h6 ,.tingText div{
+            font-weight: 100;
+        }
+        .heartImg img {
+            width: 298px;
+            height: 220px;
+        }
+        .heartText h2:hover, .heartText h6:hover,.hot .hotText div:hover {
+            color: #83bc80;
+        }
+        .ting{
+             width: 298px;
+                margin-right: 20px;
+         }
+        .ting,.ting2,.ting3{
+            border:1px solid #e8e8e8;
+            margin-bottom: 50px;
+        }
+        .tingImg{
+            overflow: hidden;
+            position: relative;
+        }
+        .tingImg .tingMain,.tingImg .p{
+            width: 298px;
+            height: 300px;
+            vertical-align: top;
+        }
+        .tingImg .p img{
+            margin-top: 100px;
+            margin-left: 100px;
+        }
+        .tingImg .p{
+            background-color: black;
+            opacity: 0.3;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            display: none;
+        }
+        .tingImg:hover .p {
+            display: block;
+            z-index: 100000;
+        }
+        .tingText{
+            padding: 20px 50px 10px 20px ;
+        }
+        .tingText p{
+            font-weight: 100;
+            font-size: 13px;
+            margin-top: 5px;
+        }
+        .tingText div{
+            margin-top: 15px;
+        }
+        .ting2{
+            margin-left: 10px;
+        }
+        .ting3{
+            margin-left: 30px;
+        }
+        .hot{
+            width: 235px;
+            height: 235px;
+            border:1px solid #e8e8e8;
+            position: relative;
+            overflow: hidden;
+            margin-right: 3px;
+        }
+        .hot img{
+            width: 235px;
+            height: 235px;
+        }
+        .hot .hotImg{
+            width: 86px;
+            position: absolute;
+            top: 40px;
+            left: 20px;
+        }
+        .hot .hotImg img{
+            width: 86px;
+            height: 86px;
+            vertical-align: bottom;
+            border-radius: 43px;
+        }
+        .hot .hotText{
+            width: 100px;
+            position: absolute;
+            top: 70px;
+            left:120px;
+        }
+        .hot .hotText p{
+            font-size: 14px;
+            font-weight: 100;
+            margin-top: 20px;
+            position: relative;
+        }
+        .hot .hotText p::before {
+            content: "";
+            width: 30px;
+            border-top: 1px solid black;
+            position: absolute;
+            top: -5px;
+        }
+        .userM{
+            position: absolute;
+            top: 130px;
+            left: 30px;
+        }
+        .userM img{
+            width: 59px;
+            height: 19px;
+        }
+        .more{
+            clear: both;
+            width: 192px;
+            height: 56px;
+            border: 1px solid rgb(121, 183, 28);
+            border-radius: 28px;
+            margin: 340px auto 60px;
+        }
+        .more div{
+            width: 186px;
+            height: 50px;
+           background-color:  rgb(121, 183, 28);
+            border-radius: 26px;
+            margin: 3px;
+            line-height: 50px;
+            text-align: center;
+            color: white;
+        }
+        .more div:hover {
+            /*width: 34px;*/
+            /*height: 34px;*/
+            /*margin: 3px;*/
+            box-shadow: 0px 0px 2px 1px white inset;
+        }
+        .top{
+            display: none;
+        }
+        .top,.topH{
+            position: fixed;
+            bottom: 150px;
+            right: 50px;
+        }
+        .top img ,.topH img{
+            width: 50px;
+            height: 50px;
+        }
+        .top .topimg{
+            opacity: 0.1;
+        }
+        .topH{
+            display: none;
+        }
+        .top:hover .topH{
+            display: block;
+            opacity: 1;
+        }
+        .foot{
+            width: 100%;
+            height: 120px;
+            background-color: black;
+        }
+        .footer{
+            padding-top: 35px;
+            width: 1000px;
+            margin: 0 auto;
+        }
+        .foot .footImg img{
+            width: 100px;
+            height: 50px;
+        }
+        .footText{
+            font-size: 12px;
+            color: gray;
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+        .app,.sina,.wechat{
+            position: relative;
+        }
+        .app img,.sina img,.wechat img{
+            width: 45px;
+            height: 45px;
+            margin-right: 20px;
+        }
+        .safe img{
+            width: 100px;
+            height: 45px;
+        }
+        .codes{
+            width: 160px;
+            height: 160px;
+            background-color: white;
+            position: absolute;
+            bottom: 70px;
+            left: -55px;
+            display: none;
+        }
+        .app .app2,.sina .sina2,.wechat .we2{
+            position: absolute;
+            top:0;
+            left: 0px;
+            display:none;
+        }
+        .codes .code {
+            width: 140px;
+            height: 140px;
+            margin: 10px;
+        }
+        .codes::before{
+            content: "";
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            transform: rotate(45deg);
+            position: absolute;
+            bottom: -10px;
+            left: 67px;
+        }
+        .app:hover .app2,.sina:hover .sina2 ,.wechat:hover .we2,.wechat:hover .codes{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<!--顶部导航-->
+<div class="nav_body" id="nav1" >
+
+    <div class="nav" >
+        <div class="nav_logo fl"><img src="img/head-logo.png" alt=""></div>
+        <span class="always fl">首页</span>
+        <span class="span fl">阅读</span>
+        <span class="span fl">电台</span>
+        <span class="span fl">碎片</span>
+        <span class="span fl">客户端</span>
+        <div class="login fr">登录 / 注册</div>
+        <div class="edit fr">
+            <div><img src="img/edit-icon.png" alt=""></div>
+        </div>
+    </div>
+</div>
+<a name="_top"></a>
+<div class="all">
+    <div class="main" id="main">
+        <div class="pics">
+            <div class="imgR fl"><img src="img/1.jpg" alt="">
+                <div class="imgText">
+                    <div>坚持绘画147天,这些意想不到的事情发生了</div>
+                </div>
+            </div>
+            <div class="right fl">
+                <div><img src="img/2.jpg" alt="">
+                    <div class="imgText">
+                        <div>喜欢孙悟空的燃,是因为</div>
+                    </div>
+                </div>
+                <div><img src="img/4.jpg" alt="">
+                    <div class="imgText">
+                        <div>毕业三年,写给自己的22句忠告</div>
+                    </div>
+                </div>
+            </div>
+            <div class="right fl">
+                <div><img src="img/3.jpg" alt="">
+                    <div class="imgText">
+                        <div>暗恋这件事,道阻且长</div>
+                    </div>
+                </div>
+                <div><img src="img/5.jpg" alt="">
+                    <div class="imgText">
+                        <div>这样练习,你才会掌握说话的技巧</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="read">
+            <img src="img/square.png" alt=""> 阅读 | Read
+        </div>
+        <div class="heart">
+            <div class="heartText fl">
+                <h2>偷心</h2>
+                <h6>By / 子夜晨星 </h6>
+                <p>-001-她说：“我要去偷一个东西，你帮我好不好？”她说这句话的时候，没有一点求我办事的语气，反而有些趾高气扬，不可一世的狂傲。我当时正躺在草地上晒太阳，没好气 <a href="">VIEW ALL
+                    <img
+                            src="img/viewall.png" alt=""></a></p>
+                <div>3.0k次阅读 | 评论:24 | 喜欢:119</div>
+            </div>
+            <div class="heartImg fl"><img src="img/heart.jpg" alt=""></div>
+        </div>
+        <div class="heart">
+            <div class="heartText fl">
+                <h2>友人集|与风眠,与你告别和重逢</h2>
+                <h6>By / 南逢酒馆 </h6>
+                <p>—— 离别，也是重逢——阿簌在电话里对我说，前一天晚上做了一个梦，梦里有我，醒来觉得很挂念，就很想跟我说说话。原来，梦里梦见的人就去见吧，这种俗气的理是真的。这 <a href="">VIEW ALL
+                    <img
+                            src="img/viewall.png" alt=""></a></p>
+                <div>2.3k次阅读 | 评论:7 | 喜欢:33</div>
+            </div>
+            <div class="heartImg fl"><img src="img/friend.jpg" alt=""></div>
+        </div>
+        <div class="heart">
+            <div class="heartText fl">
+                <h2>《致我们单纯的小美好》: 原谅我, 只会这样笨拙的...</h2>
+                <h6>By / 子夜晨星 </h6>
+                <p>微博 @闫晓雨Esse微信公众号：再见酒馆 “一辈子那么长，我才不会只喜欢你一个人呢！” “一辈子那么长，没想到，我真的只喜欢你一个人。”1我有所念人，隔在远 <a href="">VIEW ALL
+                    <img
+                            src="img/viewall.png" alt=""></a></p>
+                <div>12.8k次阅读 | 评论:79 | 喜欢:561</div>
+            </div>
+            <div class="heartImg fl"><img src="img/happy.gif" alt=""></div>
+        </div>
+        <div class="read">
+            <img src="img/square.png" alt=""> TING
+        </div>
+        <div class="ting fl">
+            <div class="tingImg">
+                <div class="p"><img class="play" src="img/play-icon.png" alt=""></div>
+                <div ><img class="tingMain" src="img/grandma.jpg" alt=""></div></div>
+            <div class="tingText">
+                <h2>那份笨拙的爱,是心...</h2>
+                <p>主播 / 你好南望</p>
+                <div>8.4k次播放 | 评论:33 | 喜欢:288</div>
+                </div>
+        </div>
+        <div class="ting2 fl">
+            <div class="tingImg">
+                <div class="p"><img class="play" src="img/play-icon.png" alt=""></div>
+                <div><img class="tingMain" src="img/girl.png" alt=""></div></div>
+            <div class="tingText">
+                <h2>"我从不想独身,却...</h2>
+                <p>主播 / 树茵</p>
+                <div>4.5k次播放 | 评论:10 | 喜欢:106</div>
+            </div>
+        </div>
+        <div class="ting3 fl">
+            <div class="tingImg"><div class="p"> <img class="play" src="img/play-icon.png" alt=""></div>
+                <div><img class="tingMain" src="img/tree.jpg" alt=""></div></div>
+            <div class="tingText">
+                <h2>[翻唱]无问西东</h2>
+                <p>主播 / woo崆</p>
+                <div>8.5k次播放 | 评论:39 | 喜欢:296</div>
+            </div>
+        </div>
+        <div class="read">
+            <img src="img/square.png" alt=""> 人气片客 | Hot Pianker
+        </div>
+        <div class="hot fl"><img src="img/user-bg.png" alt="">
+            <div class="hotImg"><img class="per" src="img/per1.jpg" alt=""></div>
+            <div class="userM"><img src="img/user_musician.png" alt=""></div>
+            <div class="hotText">
+                <div>双笙子</div>
+                <p>古风歌手双笙</p>
+            </div>
+        </div>
+        <div class="hot fl"><img src="img/user-bg.png" alt="">
+            <div class="hotImg"><img class="per" src="img/per2.jpg" alt=""></div>
+            <div class="userM"><img src="img/user_musician.png" alt=""></div>
+            <div class="hotText">
+                <div>MrMiss组合</div>
+                <p>28届金曲奖最佳演唱組合/爵士人声组合MrMiss</p>
+            </div>
+        </div>
+        <div class="hot fl"><img src="img/user-bg.png" alt="">
+            <div class="hotImg"><img class="per" src="img/per3.jpg" alt=""></div>
+            <div class="userM"><img src="img/user_musician.png" alt=""></div>
+            <div class="hotText">
+                <div>Muma木马</div>
+                <p>摇滚音乐人 木马</p>
+            </div>
+        </div>
+        <div class="hot fl"><img src="img/user-bg.png" alt="">
+            <div class="hotImg"><img class="per" src="img/per4.jpg" alt=""></div>
+            <div class="userM"><img src="img/user_author.png" alt=""></div>
+            <div class="hotText">
+                <div>片刻小主</div>
+                <p>片刻官方猫🐱</p>
+            </div>
+        </div>
+        <div class="more">
+            <div>查看更多精选内容</div>
+        </div>
+    </div>
+</div>
+<div class="foot">
+    <div class="footer">
+    <div class="footImg fl"><img src="img/foot-logo.png" alt=""></div>
+    <div class="footText fl">
+        <div class="footText1">关于我们 友情链接 片刻帮助 意见反馈 成长记忆</div>
+        <div>All rights reserved © 2016 pianke.me /黔ICP备17008875号-1</div>
+    </div>
+    <div class="footRight fr">
+        <div class="app fl">
+            <img src="img/foot-app.png" alt="">
+            <img class="app2" src="img/foot-appH.png" alt="">
+        </div>
+        <div class="sina fl">
+            <img src="img/foot-sina.png" alt="">
+            <img class="sina2" src="img/foot-sinaH.png" alt="">
+        </div>
+        <div class="wechat fl">
+            <img src="img/foot-wechat.png" alt="">
+        <div class="codes"><img class="code" src="img/pianke-code.png" alt=""></div>
+            <img class="we2" src="img/foot-wechatH.png" alt="">
+        </div>
+    <div class="safe fl">
+            <img src="img/foot-safe.png" alt=""></div>
+    </div>
+</div>
+</div>
+
+<a href="#_top">
+    <div id="oTop" class="top">
+        <img class="topimg" src="img/back-top.png" alt="">
+        <div class="topH"><img src="img/back-topH.png" alt=""></div>
+    </div>
+</a>
+<script>
+    var nav = document.getElementById("nav1");
+    var oTop = document.getElementById("oTop");
+    var sNum=0;
+    var num=0;
+    window.onscroll=function () {
+        num = sNum;
+        var scr = document.documentElement.scrollTop;
+        sNum = scr;
+        if (scr > 80 && num - scr < 0) {
+                nav.style.top = -100+"px";
+        }
+        else {
+            nav.style.top = 0+"px";
+        }
+        if(scr <= 600){
+            oTop.style.display = "none";
+        }
+        else{
+            oTop.style.display = 'block';
+        }
+    }
+</script>
+</body>
+</html>
